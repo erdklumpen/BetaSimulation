@@ -11,8 +11,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    abstractca.cpp \
+    abstractstate.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    abstractca.h \
+    abstractstate.h
 
 FORMS    += mainwindow.ui
