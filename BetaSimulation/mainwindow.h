@@ -2,8 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "eca50.h"
+#include "eca.h"
 #include "onedimensionstate.h"
+#include "automatasettings.h"
 #include <QDebug>
 
 #include <QGraphicsGridLayout>
@@ -11,6 +12,7 @@
 #include <QGraphicsScene>
 #include <QPen>
 #include <QBrush>
+#include <QInputDialog>
 
 namespace Ui {
     class MainWindow;
@@ -27,7 +29,12 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    double m_alpha;
+    double m_beta;
+
 private slots:
+    void on_actionECA_triggered();
+    void on_actionEinstellungen_triggered();
     void on_actionECA50_triggered();
 };
 

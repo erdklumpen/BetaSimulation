@@ -14,15 +14,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     abstractca.cpp \
     abstractstate.cpp \
-    eca50.cpp \
     onedimensionstate.cpp \
-    abstract1dca.cpp
+    abstract1dca.cpp \
+    automatasettings.cpp \
+    eca.cpp
 
 HEADERS  += mainwindow.h \
     abstractca.h \
     abstractstate.h \
-    eca50.h \
     onedimensionstate.h \
-    abstract1dca.h
+    abstract1dca.h \
+    automatasettings.h \
+    eca.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    automatasettings.ui

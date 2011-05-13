@@ -4,12 +4,14 @@
 #include "onedimensionstate.h"
 #include "abstractca.h"
 
-#include <ctime>
+#include <QDebug>
 
 class Abstract1DCA : public AbstractCA
 {
 public:
     Abstract1DCA(float alpha, float beta, int length);
+
+    void run(int steps);
 
     void setState(OneDimensionState *state) {m_state  = state;}
     OneDimensionState* state() {return m_state;}

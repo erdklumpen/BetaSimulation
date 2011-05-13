@@ -20,6 +20,15 @@
     </item>
    </layout>
   </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -42,25 +51,28 @@
      <property name="title">
       <string>Eine Dimension</string>
      </property>
-     <addaction name="actionECA50"/>
+     <addaction name="actionECA"/>
     </widget>
     <addaction name="menuEine_Dimension"/>
+    <addaction name="separator"/>
+    <addaction name="actionEinstellungen"/>
    </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuAutomaten"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionECA50">
    <property name="text">
     <string>ECA50</string>
+   </property>
+  </action>
+  <action name="actionEinstellungen">
+   <property name="text">
+    <string>Einstellungen</string>
+   </property>
+  </action>
+  <action name="actionECA">
+   <property name="text">
+    <string>ECA</string>
    </property>
   </action>
  </widget>

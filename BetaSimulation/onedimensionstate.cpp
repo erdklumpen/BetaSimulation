@@ -19,10 +19,10 @@ void OneDimensionState::setZeroEigen(int i)
 bool OneDimensionState::atEigen(int i)
 {
     if(i < 0)
-        return 0;
+        return m_eigenData->testBit(size() - 1);
 
     if(i >= size())
-        return 0;
+        return m_eigenData->testBit(0);
 
     return m_eigenData->testBit(i);
 }
@@ -41,10 +41,10 @@ void OneDimensionState::setZeroObserved(int i)
 bool OneDimensionState::atObserved(int i)
 {
     if(i < 0)
-        return 0;
+        return m_observedData->testBit(size() - 1);
 
     if(i >= size())
-        return 0;
+        return m_observedData->testBit(0);
 
     return m_observedData->testBit(i);
 }
