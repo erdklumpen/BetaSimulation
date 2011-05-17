@@ -33,3 +33,19 @@ void Abstract1DCA::run(int steps)
         m_state = k;
     }
 }
+
+int Abstract1DCA::activity()
+{
+    int instable = 0;
+
+    for(int i = 0; i < m_state->size(); ++i)
+    {
+        QVector<bool> neighbourhood = eigenNeighbourhood(i);
+        bool newState = rule(neighbourhood, i);
+
+        if(newState != m_state->atEigen(i))
+            instable++;
+    }
+
+    return instable;
+}

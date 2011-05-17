@@ -17,6 +17,7 @@ public:
 
 private:
     QVector<bool> neighbourhood(int i);
+    QVector<bool> eigenNeighbourhood(int i);
     bool rule(QVector<bool> neighbours, int self);
     void update(int i, bool newState);
 

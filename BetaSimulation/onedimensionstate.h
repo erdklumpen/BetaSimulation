@@ -26,7 +26,9 @@ public:
     void setZero(int i);
 
     int size() {return m_eigenData->size();}
+
     QString toString();
+    int density();
 
 private:
     QBitArray* m_eigenData;

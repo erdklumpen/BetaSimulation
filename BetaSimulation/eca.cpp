@@ -36,6 +36,15 @@ QVector<bool> ECA::neighbourhood(int i)
     return neighbours;
 }
 
+QVector<bool> ECA::eigenNeighbourhood(int i)
+{
+    QVector<bool> neighbours(2);
+
+    neighbours[0] = m_state->atEigen(i-1);
+    neighbours[1] = m_state->atEigen(i+1);
+    return neighbours;
+}
+
 bool ECA::rule(QVector<bool> neighbours, int self)
 {
     for(int i = 0; i < m_usedClauses->length(); ++i)

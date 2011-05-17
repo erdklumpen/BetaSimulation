@@ -26,8 +26,12 @@ public:
     float beta() {return m_beta;}
     float randomNumber() {return (*m_gen)();}
 
+    virtual int activity() =0;
+    virtual int density() =0;
+
 protected:
     virtual QVector<bool> neighbourhood(int i) =0;
+    virtual QVector<bool> eigenNeighbourhood(int i) =0;
     virtual bool rule(QVector<bool> neighbours, int self) =0;
     virtual void update(int i, bool newState) =0;
 

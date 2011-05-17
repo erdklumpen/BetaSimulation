@@ -81,3 +81,8 @@ QString OneDimensionState::toString()
 
     return out;
 }
+
+int OneDimensionState::density()
+{
+    return m_eigenData->count(true);
+}

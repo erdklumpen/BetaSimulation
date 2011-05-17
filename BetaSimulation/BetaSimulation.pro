@@ -9,6 +9,9 @@ QT       += core gui
 TARGET = BetaSimulation
 TEMPLATE = app
 
+CONFIG += qwt
+
+LIBS += -lqwt
 
 SOURCES += main.cpp\
         mainwindow.cpp \
