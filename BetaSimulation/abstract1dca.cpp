@@ -34,9 +34,9 @@ void Abstract1DCA::run(int steps)
     }
 }
 
-int Abstract1DCA::activity()
+float Abstract1DCA::activity()
 {
-    int instable = 0;
+    float instable = 0;
 
     for(int i = 0; i < m_state->size(); ++i)
     {

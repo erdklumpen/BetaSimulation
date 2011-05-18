@@ -26,8 +26,8 @@ public:
     float beta() {return m_beta;}
     float randomNumber() {return (*m_gen)();}
 
-    virtual int activity() =0;
-    virtual int density() =0;
+    virtual float activity() =0;
+    virtual float density() =0;
 
 protected:
     virtual QVector<bool> neighbourhood(int i) =0;

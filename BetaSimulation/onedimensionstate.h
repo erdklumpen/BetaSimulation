@@ -5,6 +5,8 @@
 #include <QBitArray>
 #include <QPair>
 
+#include <QDebug>
+
 class OneDimensionState : public AbstractState
 {
 public:
@@ -28,7 +30,7 @@ public:
     int size() {return m_eigenData->size();}
 
     QString toString();
-    int density();
+    float density();
 
 private:
     QBitArray* m_eigenData;

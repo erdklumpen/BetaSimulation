@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     onedimensionstate.cpp \
     abstract1dca.cpp \
     automatasettings.cpp \
-    eca.cpp
+    eca.cpp \
+    experimentwizard.cpp \
+    ecasettings.cpp
 
 HEADERS  += mainwindow.h \
     abstractca.h \
@@ -28,7 +30,11 @@ HEADERS  += mainwindow.h \
     onedimensionstate.h \
     abstract1dca.h \
     automatasettings.h \
-    eca.h
+    eca.h \
+    experimentwizard.h \
+    ecasettings.h
 
 FORMS    += mainwindow.ui \
-    automatasettings.ui
+    automatasettings.ui \
+    experimentwizard.ui \
+    ecasettings.ui

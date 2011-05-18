@@ -23,6 +23,9 @@ private:
 
     int m_ecaNumber;
 
+    void setOne(int i, float randBeta);
+    void setZero(int i, float randBeta);
+
     QList<Clause>* m_usedClauses;
     Clause m_clauseArray[8];
 

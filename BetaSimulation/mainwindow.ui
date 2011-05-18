@@ -35,7 +35,7 @@
      <x>0</x>
      <y>0</y>
      <width>470</width>
-     <height>27</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
@@ -56,6 +56,7 @@
     <addaction name="menuEine_Dimension"/>
     <addaction name="separator"/>
     <addaction name="actionEinstellungen"/>
+    <addaction name="actionExperiment"/>
    </widget>
    <widget class="QMenu" name="menuPlot">
     <property name="title">
@@ -64,9 +65,16 @@
     <addaction name="action1_Dichte"/>
     <addaction name="actionAktivit_t"/>
    </widget>
+   <widget class="QMenu" name="menuTest">
+    <property name="title">
+     <string>Test</string>
+    </property>
+    <addaction name="actionECA1000"/>
+   </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuAutomaten"/>
    <addaction name="menuPlot"/>
+   <addaction name="menuTest"/>
   </widget>
   <action name="actionECA50">
    <property name="text">
@@ -91,6 +99,16 @@
   <action name="actionAktivit_t">
    <property name="text">
     <string>Aktivität</string>
+   </property>
+  </action>
+  <action name="actionExperiment">
+   <property name="text">
+    <string>Experiment</string>
+   </property>
+  </action>
+  <action name="actionECA1000">
+   <property name="text">
+    <string>ECA1000</string>
    </property>
   </action>
  </widget>

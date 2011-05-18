@@ -16,8 +16,8 @@ public:
     void setState(OneDimensionState *state) {m_state  = state;}
     OneDimensionState* state() {return m_state;}
 
-    int activity();
-    int density() {return m_state->density();}
+    float activity();
+    float density() {return m_state->density();}
 
 protected:
     OneDimensionState* m_state;

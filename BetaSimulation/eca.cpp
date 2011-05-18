@@ -20,8 +20,6 @@ ECA::ECA(float alpha, float beta, int length, int ecaNumber) : Abstract1DCA(alph
         int bit = ecaNumber % 2;
         ecaNumber = ecaNumber >> 1;
 
-        qDebug() << bit;
-
         if(bit == 1)
             m_usedClauses->append(m_clauseArray[i]);
     }
@@ -67,20 +65,35 @@ void ECA::update(int i, bool newState)
     if(randAlpha <= alpha())
     {
         if(newState)
-        {
-            m_workState->setOneEigen(i);
+            setOne(i, randBeta);
 
-            if(randBeta <= beta())
-                m_workState->setOneObserved(i);
-        }
         else
-        {
-            m_workState->setZeroEigen(i);
-
-            if(randBeta <= beta())
-                m_workState->setZeroObserved(i);
-        }
+            setZero(i, randBeta);
     }
+    else
+    {
+        if(m_state->atEigen(i))
+            setOne(i, randBeta);
+
+        else
+            setZero(i, randBeta);
+    }
+}
+
+void ECA::setOne(int i, float randBeta)
+{
+    m_workState->setOneEigen(i);
+
+    if(randBeta <= beta())
+        m_workState->setOneObserved(i);
+}
+
+void ECA::setZero(int i, float randBeta)
+{
+    m_workState->setZeroEigen(i);
+
+    if(randBeta <= beta())
+        m_workState->setZeroObserved(i);
 }
 
 // 000

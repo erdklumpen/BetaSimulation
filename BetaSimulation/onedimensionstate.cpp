@@ -82,7 +82,7 @@ QString OneDimensionState::toString()
     return out;
 }
 
-int OneDimensionState::density()
+float OneDimensionState::density()
 {
-    return m_eigenData->count(true);
+    return ((float)(m_eigenData->count(true)) / size());
 }
