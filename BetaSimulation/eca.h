@@ -8,7 +8,7 @@
 
 class ECA;
 
-typedef bool (ECA::*Clause)(QVector<bool> neighbours, int self);
+typedef int (ECA::*Clause)(QVector<int> neighbours, int self);
 
 class ECA : public Abstract1DCA
 {
@@ -16,28 +16,24 @@ public:
     ECA(float alpha, float beta, int length, int ecaNumber);
 
 private:
-    QVector<bool> neighbourhood(int i);
-    QVector<bool> eigenNeighbourhood(int i);
-    bool rule(QVector<bool> neighbours, int self);
-    void update(int i, bool newState);
+    QVector<int> neighbourhood(QPoint i);
+    QVector<int> eigenNeighbourhood(QPoint i);
+    int rule(QVector<int> neighbours, QPoint self);
 
     int m_ecaNumber;
-
-    void setOne(int i, float randBeta);
-    void setZero(int i, float randBeta);
 
     QList<Clause>* m_usedClauses;
     Clause m_clauseArray[8];
 
-    bool clause000(QVector<bool> neighbours, int self);
-    bool clause001(QVector<bool> neighbours, int self);
-    bool clause010(QVector<bool> neighbours, int self);
-    bool clause011(QVector<bool> neighbours, int self);
+    int clause000(QVector<int> neighbours, int self);
+    int clause001(QVector<int> neighbours, int self);
+    int clause010(QVector<int> neighbours, int self);
+    int clause011(QVector<int> neighbours, int self);
 
-    bool clause100(QVector<bool> neighbours, int self);
-    bool clause101(QVector<bool> neighbours, int self);
-    bool clause110(QVector<bool> neighbours, int self);
-    bool clause111(QVector<bool> neighbours, int self);
+    int clause100(QVector<int> neighbours, int self);
+    int clause101(QVector<int> neighbours, int self);
+    int clause110(QVector<int> neighbours, int self);
+    int clause111(QVector<int> neighbours, int self);
 };
 
 #endif // ECA_H

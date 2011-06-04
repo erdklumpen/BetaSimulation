@@ -25,30 +25,30 @@ ECA::ECA(float alpha, float beta, int length, int ecaNumber) : Abstract1DCA(alph
     }
 }
 
-QVector<bool> ECA::neighbourhood(int i)
+QVector<int> ECA::neighbourhood(QPoint i)
 {
-    QVector<bool> neighbours(2);
+    QVector<int> neighbours(2);
 
-    neighbours[0] = m_state->atObserved(i-1);
-    neighbours[1] = m_state->atObserved(i+1);
+    neighbours[0] = m_state->atObserved(i.x()-1);
+    neighbours[1] = m_state->atObserved(i.x()+1);
     return neighbours;
 }
 
-QVector<bool> ECA::eigenNeighbourhood(int i)
+QVector<int> ECA::eigenNeighbourhood(QPoint i)
 {
-    QVector<bool> neighbours(2);
+    QVector<int> neighbours(2);
 
-    neighbours[0] = m_state->atEigen(i-1);
-    neighbours[1] = m_state->atEigen(i+1);
+    neighbours[0] = m_state->atEigen(i.x()-1);
+    neighbours[1] = m_state->atEigen(i.x()+1);
     return neighbours;
 }
 
-bool ECA::rule(QVector<bool> neighbours, int self)
+int ECA::rule(QVector<int> neighbours, QPoint self)
 {
     for(int i = 0; i < m_usedClauses->length(); ++i)
     {
         Clause clause = m_usedClauses->at(i);
-        bool result = (this->*clause)(neighbours, self);
+        int result = (this->*clause)(neighbours, self.x());
 
         if(result == 1)
             return true;
@@ -57,47 +57,8 @@ bool ECA::rule(QVector<bool> neighbours, int self)
     return false;
 }
 
-void ECA::update(int i, bool newState)
-{
-    double randAlpha = randomNumber();
-    double randBeta = randomNumber();
-
-    if(randAlpha <= alpha())
-    {
-        if(newState)
-            setOne(i, randBeta);
-
-        else
-            setZero(i, randBeta);
-    }
-    else
-    {
-        if(m_state->atEigen(i))
-            setOne(i, randBeta);
-
-        else
-            setZero(i, randBeta);
-    }
-}
-
-void ECA::setOne(int i, float randBeta)
-{
-    m_workState->setOneEigen(i);
-
-    if(randBeta <= beta())
-        m_workState->setOneObserved(i);
-}
-
-void ECA::setZero(int i, float randBeta)
-{
-    m_workState->setZeroEigen(i);
-
-    if(randBeta <= beta())
-        m_workState->setZeroObserved(i);
-}
-
 // 000
-bool ECA::clause000(QVector<bool> neighbours, int self)
+int ECA::clause000(QVector<int> neighbours, int self)
 {
     if(!neighbours[0] && !m_state->atEigen(self) && !neighbours[1])
         return true;
@@ -107,7 +68,7 @@ bool ECA::clause000(QVector<bool> neighbours, int self)
 }
 
 // 001
-bool ECA::clause001(QVector<bool> neighbours, int self)
+int ECA::clause001(QVector<int> neighbours, int self)
 {
     if(!neighbours[0] && !m_state->atEigen(self) && neighbours[1])
         return true;
@@ -118,7 +79,7 @@ bool ECA::clause001(QVector<bool> neighbours, int self)
 }
 
 // 010
-bool ECA::clause010(QVector<bool> neighbours, int self)
+int ECA::clause010(QVector<int> neighbours, int self)
 {
     if(!neighbours[0] && m_state->atEigen(self) && !neighbours[1])
         return true;
@@ -129,7 +90,7 @@ bool ECA::clause010(QVector<bool> neighbours, int self)
 }
 
 // 011
-bool ECA::clause011(QVector<bool> neighbours, int self)
+int ECA::clause011(QVector<int> neighbours, int self)
 {
     if(!neighbours[0] && m_state->atEigen(self) && neighbours[1])
         return true;
@@ -140,7 +101,7 @@ bool ECA::clause011(QVector<bool> neighbours, int self)
 }
 
 //100
-bool ECA::clause100(QVector<bool> neighbours, int self)
+int ECA::clause100(QVector<int> neighbours, int self)
 {
     if(neighbours[0] && !m_state->atEigen(self) && !neighbours[1])
         return true;
@@ -151,7 +112,7 @@ bool ECA::clause100(QVector<bool> neighbours, int self)
 }
 
 // 101
-bool ECA::clause101(QVector<bool> neighbours, int self)
+int ECA::clause101(QVector<int> neighbours, int self)
 {
     if(neighbours[0] && !m_state->atEigen(self) && neighbours[1])
         return true;
@@ -161,7 +122,7 @@ bool ECA::clause101(QVector<bool> neighbours, int self)
 
 }
 // 110
-bool ECA::clause110(QVector<bool> neighbours, int self)
+int ECA::clause110(QVector<int> neighbours, int self)
 {
     if(neighbours[0] && m_state->atEigen(self) && !neighbours[1])
         return true;
@@ -172,7 +133,7 @@ bool ECA::clause110(QVector<bool> neighbours, int self)
 }
 
 // 111
-bool ECA::clause111(QVector<bool> neighbours, int self)
+int ECA::clause111(QVector<int> neighbours, int self)
 {
     if(neighbours[0] && m_state->atEigen(self) && neighbours[1])
         return true;

@@ -2,7 +2,7 @@
 #define ONEDIMENSIONSTATE_H
 
 #include "abstractstate.h"
-#include <QBitArray>
+#include <QVector>
 #include <QPair>
 
 #include <QDebug>
@@ -11,30 +11,23 @@ class OneDimensionState : public AbstractState
 {
 public:
     OneDimensionState(int size);
+    ~OneDimensionState();
 
-    void setOneEigen(int i);
-    void setZeroEigen(int i);
+    void setAtEigen(int index, int value);
+    void setAtObserved(int index, int value);
+    void setAt(int index, int value);
 
-    bool atEigen(int i);
-
-    void setOneObserved(int i);
-    void setZeroObserved(int i);
-
-    bool atObserved(int i);
-
-    QPair<bool, bool> at(int i);
-
-    void setOne(int i);
-    void setZero(int i);
+    int atEigen(int index);
+    int atObserved(int index);
 
     int size() {return m_eigenData->size();}
 
     QString toString();
-    float density();
+    float density(int x);
 
 private:
-    QBitArray* m_eigenData;
-    QBitArray* m_observedData;
+    QVector<int>* m_eigenData;
+    QVector<int>* m_observedData;
 };
 
 #endif // ONEDIMENSIONSTATE_H

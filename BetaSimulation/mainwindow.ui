@@ -53,10 +53,16 @@
      </property>
      <addaction name="actionECA"/>
     </widget>
+    <widget class="QMenu" name="menuZwei_Dimensionen">
+     <property name="title">
+      <string>Zwei Dimensionen</string>
+     </property>
+     <addaction name="actionSpiel_des_Lebens"/>
+    </widget>
     <addaction name="menuEine_Dimension"/>
+    <addaction name="menuZwei_Dimensionen"/>
     <addaction name="separator"/>
     <addaction name="actionEinstellungen"/>
-    <addaction name="actionExperiment"/>
    </widget>
    <widget class="QMenu" name="menuPlot">
     <property name="title">
@@ -76,11 +82,6 @@
    <addaction name="menuPlot"/>
    <addaction name="menuTest"/>
   </widget>
-  <action name="actionECA50">
-   <property name="text">
-    <string>ECA50</string>
-   </property>
-  </action>
   <action name="actionEinstellungen">
    <property name="text">
     <string>Einstellungen</string>
@@ -101,14 +102,14 @@
     <string>Aktivität</string>
    </property>
   </action>
-  <action name="actionExperiment">
-   <property name="text">
-    <string>Experiment</string>
-   </property>
-  </action>
   <action name="actionECA1000">
    <property name="text">
     <string>ECA1000</string>
+   </property>
+  </action>
+  <action name="actionSpiel_des_Lebens">
+   <property name="text">
+    <string>Spiel des Lebens</string>
    </property>
   </action>
  </widget>

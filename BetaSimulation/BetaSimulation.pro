@@ -21,8 +21,12 @@ SOURCES += main.cpp\
     abstract1dca.cpp \
     automatasettings.cpp \
     eca.cpp \
-    experimentwizard.cpp \
-    ecasettings.cpp
+    ecasettings.cpp \
+    cahistory.cpp \
+    plotdensitydialog.cpp \
+    twodimensionstate.cpp \
+    abstract2dca.cpp \
+    gameoflife.cpp
 
 HEADERS  += mainwindow.h \
     abstractca.h \
@@ -31,10 +35,14 @@ HEADERS  += mainwindow.h \
     abstract1dca.h \
     automatasettings.h \
     eca.h \
-    experimentwizard.h \
-    ecasettings.h
+    ecasettings.h \
+    cahistory.h \
+    plotdensitydialog.h \
+    twodimensionstate.h \
+    abstract2dca.h \
+    gameoflife.h
 
 FORMS    += mainwindow.ui \
     automatasettings.ui \
-    experimentwizard.ui \
-    ecasettings.ui
+    ecasettings.ui \
+    plotdensitydialog.ui

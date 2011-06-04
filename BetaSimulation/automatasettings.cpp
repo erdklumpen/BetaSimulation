@@ -1,7 +1,7 @@
 #include "automatasettings.h"
 #include "ui_automatasettings.h"
 
-AutomataSettings::AutomataSettings(QWidget *parent, double alpha, double beta) :
+AutomataSettings::AutomataSettings(QWidget *parent, double alpha, double beta, int steps, int xLength, int yLength) :
     QDialog(parent),
     ui(new Ui::AutomataSettings)
 {
@@ -9,6 +9,11 @@ AutomataSettings::AutomataSettings(QWidget *parent, double alpha, double beta) :
 
     ui->alpha->setValue(alpha);
     ui->beta->setValue(beta);
+
+    ui->steps->setValue(steps);
+
+    ui->xLength->setValue(xLength);
+    ui->yLength->setValue(yLength);
 }
 
 AutomataSettings::~AutomataSettings()
@@ -36,4 +41,19 @@ double AutomataSettings::alpha()
 double AutomataSettings::beta()
 {
     return ui->beta->value();
+}
+
+int AutomataSettings::steps()
+{
+    return ui->steps->value();
+}
+
+int AutomataSettings::xLength()
+{
+    return ui->xLength->value();
+}
+
+int AutomataSettings::yLength()
+{
+    return ui->yLength->value();
 }

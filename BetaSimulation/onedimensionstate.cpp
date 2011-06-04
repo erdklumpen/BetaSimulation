@@ -2,68 +2,52 @@
 
 OneDimensionState::OneDimensionState(int size)
 {
-    m_eigenData = new QBitArray(size);
-    m_observedData = new QBitArray(size);
+    m_eigenData = new QVector<int>(size);
+    m_observedData = new QVector<int>(size);
 }
 
-void OneDimensionState::setOneEigen(int i)
+OneDimensionState::~OneDimensionState()
 {
-    m_eigenData->setBit(i);
+    delete m_eigenData;
+    delete m_observedData;
 }
 
-void OneDimensionState::setZeroEigen(int i)
+void OneDimensionState::setAtEigen(int index, int value)
 {
-    m_eigenData->clearBit(i);
+    m_eigenData->replace(index, value);
 }
 
-bool OneDimensionState::atEigen(int i)
+void OneDimensionState::setAtObserved(int index, int value)
 {
-    if(i < 0)
-        return m_eigenData->testBit(size() - 1);
-
-    if(i >= size())
-        return m_eigenData->testBit(0);
-
-    return m_eigenData->testBit(i);
+    m_observedData->replace(index, value);
 }
 
-
-void OneDimensionState::setOneObserved(int i)
+void OneDimensionState::setAt(int index, int value)
 {
-    m_observedData->setBit(i);
+    setAtEigen(index, value);
+    setAtObserved(index, value);
 }
 
-void OneDimensionState::setZeroObserved(int i)
+int OneDimensionState::atEigen(int index)
 {
-    m_observedData->clearBit(i);
+    if(index < 0)
+        return m_eigenData->at(size() - 1);
+
+    if(index >= size())
+        return m_eigenData->at(0);
+
+    return m_eigenData->at(index);
 }
 
-bool OneDimensionState::atObserved(int i)
+int OneDimensionState::atObserved(int index)
 {
-    if(i < 0)
-        return m_observedData->testBit(size() - 1);
+    if(index < 0)
+        return m_observedData->at(size() - 1);
 
-    if(i >= size())
-        return m_observedData->testBit(0);
+    if(index >= size())
+        return m_observedData->at(0);
 
-    return m_observedData->testBit(i);
-}
-
-QPair<bool, bool> OneDimensionState::at(int i)
-{
-    return QPair<bool, bool>(m_eigenData->testBit(i), m_observedData->testBit(i));
-}
-
-void OneDimensionState::setOne(int i)
-{
-    setOneEigen(i);
-    setOneObserved(i);
-}
-
-void OneDimensionState::setZero(int i)
-{
-    setZeroEigen(i);
-    setZeroObserved(i);
+    return m_observedData->at(index);
 }
 
 QString OneDimensionState::toString()
@@ -72,17 +56,14 @@ QString OneDimensionState::toString()
 
     for(int i = 0; i < m_eigenData->size(); ++i)
     {
-        if(atEigen(i))
-            out += "true ";
-        else
-            out += "false ";
+        out += QString("%1").arg(m_eigenData->at(i));
     }
 
 
     return out;
 }
 
-float OneDimensionState::density()
+float OneDimensionState::density(int x)
 {
-    return ((float)(m_eigenData->count(true)) / size());
+    return ((float)(m_eigenData->count(x)) / size());
 }

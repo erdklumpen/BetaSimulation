@@ -2,11 +2,11 @@
 #define MAINWINDOW_H
 
 #include "eca.h"
+#include "gameoflife.h"
 #include "onedimensionstate.h"
 #include "automatasettings.h"
-#include "experimentwizard.h"
-
 #include "ecasettings.h"
+#include "plotdensitydialog.h"
 
 #include <QDebug>
 
@@ -19,8 +19,10 @@
 #include <QInputDialog>
 #include <QDockWidget>
 #include <QPointF>
+#include <QPoint>
 #include <QList>
 #include <QString>
+#include <QStringList>
 #include <QMap>
 
 #include <qwt/qwt_plot.h>
@@ -45,30 +47,35 @@ private:
     double m_alpha;
     double m_beta;
 
-    QVector<QPointF> *m_densityData;
-    QVector<QPointF> *m_activityData;
+    int m_steps;
 
-    QVector<QPointF> *m_densityAlphaData;
-    QVector<QPointF> *m_densityBetaData;
+    int m_xLength;
+    int m_yLength;
 
-    QList< QPair<QString, QWidget*> > m_automats;
+    CAHistory *caData;
 
-    void saveDensity(float density) {m_densityData->append(QPointF(m_densityData->size(), density));}
-    void saveActivity(float activity) {m_activityData->append(QPointF(m_activityData->size(), activity));}
-
-    void plotDensity();
+    void plotDensity(QVector<QPointF> density);
     void plotActivity();
 
     QwtPlot* newPlot();
 
     void drawOneDimensionState(OneDimensionState *state, int line, QGraphicsScene *scene);
+    void drawTwoDimensionState(TwoDimensionState *state, int column, QGraphicsScene *scene);
+
+    CAHistory* runCA(AbstractCA &ca, int steps, bool draw = false);
+    CAHistory* runOneDimensionalCA(Abstract1DCA &ca, int steps, bool draw);
+    CAHistory* runTwoDimensionalCA(Abstract2DCA &ca, int steps, bool draw);
+
+    CAHistory* averageHistory(QVector<CAHistory*> historyVector);
+    QVector<QPointF> averageAverageHistory(QVector<CAHistory*> historyVector, QString key);
+
+    void testAutomata(AbstractCA &ca, int steps, int samples);
 
 private slots:
+    void on_actionSpiel_des_Lebens_triggered();
     void on_actionECA1000_triggered();
-    void on_actionExperiment_triggered();
     void on_actionECA_triggered();
     void on_actionEinstellungen_triggered();
-    void on_actionECA50_triggered();
     void on_action1_Dichte_triggered();
 };
 
