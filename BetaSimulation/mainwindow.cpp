@@ -206,8 +206,12 @@ void MainWindow::testAutomata(AbstractCA &ca, int steps, int samples)
     CAHistory alphaHistory;
     CAHistory betaHistory;
 
-    float alpha = 0.9;
-    while(alpha < 1.01)
+    float border = 1.01;
+    float start = 0.0;
+    float step = 0.1;
+
+    float alpha = start;
+    while(alpha < border)
     {
         qDebug() << "alpha: " << alpha;
         ca.initAlpha(alpha);
@@ -251,11 +255,11 @@ void MainWindow::testAutomata(AbstractCA &ca, int steps, int samples)
             alphaHistory.appendDensity(key, average, alpha);
         }
 
-        alpha += 0.01;
+        alpha += step;
     }
 
-    float beta = 0.9;
-    while(beta < 1.01)
+    float beta = start;
+    while(beta < border)
     {
         qDebug() << "beta: " << beta;
         ca.initBeta(beta);
@@ -299,7 +303,7 @@ void MainWindow::testAutomata(AbstractCA &ca, int steps, int samples)
             betaHistory.appendDensity(key, average, beta);
         }
 
-        beta += 0.01;
+        beta += step;
     }
 
     plotAlphaBeta(alphaHistory.getDensity("1"), betaHistory.getDensity("1"), "1-Dichte");
