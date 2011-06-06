@@ -26,7 +26,9 @@ SOURCES += main.cpp\
     plotdensitydialog.cpp \
     twodimensionstate.cpp \
     abstract2dca.cpp \
-    gameoflife.cpp
+    gameoflife.cpp \
+    minority.cpp \
+    majority.cpp
 
 HEADERS  += mainwindow.h \
     abstractca.h \
@@ -40,7 +42,9 @@ HEADERS  += mainwindow.h \
     plotdensitydialog.h \
     twodimensionstate.h \
     abstract2dca.h \
-    gameoflife.h
+    gameoflife.h \
+    minority.h \
+    majority.h
 
 FORMS    += mainwindow.ui \
     automatasettings.ui \

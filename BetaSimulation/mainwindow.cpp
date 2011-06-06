@@ -366,3 +366,15 @@ void MainWindow::on_actionSpiel_des_Lebens_2_triggered()
     GameOfLife gol = GameOfLife(m_alpha, m_beta, m_xLength, m_yLength);
     testAutomata(gol, m_steps, samples);
 }
+
+void MainWindow::on_actionMajority_triggered()
+{
+    Majority majority = Majority(m_alpha, m_beta, m_xLength, m_yLength);
+    runCA(majority, m_steps, true);
+}
+
+void MainWindow::on_actionMinority_triggered()
+{
+    Minority Minority = Minority(m_alpha, m_beta, m_xLength, m_yLength);
+    runCA(Minority, m_steps, true);
+}

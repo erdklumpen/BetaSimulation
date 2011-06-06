@@ -3,6 +3,9 @@
 
 #include "eca.h"
 #include "gameoflife.h"
+#include "majority.h"
+#include "minority.h"
+
 #include "onedimensionstate.h"
 #include "automatasettings.h"
 #include "ecasettings.h"
@@ -81,6 +84,7 @@ private slots:
     void on_actionECA_triggered();
     void on_actionEinstellungen_triggered();
     void on_action1_Dichte_triggered();
+    void on_actionMajority_triggered();
 };
 
 #endif // MAINWINDOW_H
