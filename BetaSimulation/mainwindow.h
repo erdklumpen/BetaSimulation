@@ -85,6 +85,7 @@ private slots:
     void on_actionEinstellungen_triggered();
     void on_action1_Dichte_triggered();
     void on_actionMajority_triggered();
+    void on_actionMinority_triggered();
 };
 
 #endif // MAINWINDOW_H

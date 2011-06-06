@@ -35,7 +35,7 @@
      <x>0</x>
      <y>0</y>
      <width>470</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
@@ -58,6 +58,8 @@
       <string>Zwei Dimensionen</string>
      </property>
      <addaction name="actionSpiel_des_Lebens"/>
+     <addaction name="actionMajority"/>
+     <addaction name="actionMinority"/>
     </widget>
     <addaction name="menuEine_Dimension"/>
     <addaction name="menuZwei_Dimensionen"/>
@@ -116,6 +118,16 @@
   <action name="actionSpiel_des_Lebens_2">
    <property name="text">
     <string>Spiel des Lebens</string>
+   </property>
+  </action>
+  <action name="actionMajority">
+   <property name="text">
+    <string>Majority</string>
+   </property>
+  </action>
+  <action name="actionMinority">
+   <property name="text">
+    <string>Minority</string>
    </property>
   </action>
  </widget>
