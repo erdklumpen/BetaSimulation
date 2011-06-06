@@ -14,18 +14,24 @@ TwoDimensionState::TwoDimensionState(int xLength, int yLength)
 
 TwoDimensionState::~TwoDimensionState()
 {
+    for(int i = 0; i < m_eigenData->size(); ++i)
+    {
+        delete m_eigenData->at(i);
+        delete m_observedData->at(i);
+    }
+
     delete m_eigenData;
     delete m_observedData;
 }
 
 float TwoDimensionState::density(int x)
 {
-    int sum;
+    float sum = 0.0;
 
-    for(int i = 0; i < xSize(); ++i)
+    for(int i = 0; i < ySize(); ++i)
         sum += m_eigenData->at(i)->density(x);
 
-    return ((float)(sum) / ySize());
+    return (sum / ySize());
 }
 
 QString TwoDimensionState::toString()

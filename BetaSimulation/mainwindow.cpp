@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_alpha = 1;
     m_beta = 1;
 
-    m_steps = 1;
+    m_steps = 10;
 
     m_xLength = 10;
     m_yLength = 10;
@@ -169,9 +169,13 @@ void MainWindow::plotDensity(QVector<QPointF> density)
     curve->attach(plot);
 }
 
-void MainWindow::plotActivity()
+void MainWindow::plotActivity(QVector<QPointF> activity)
 {
+    QwtPlotCurve *curve = new QwtPlotCurve();
+    curve->setSamples(activity);
 
+    QwtPlot *plot = newPlot();
+    curve->attach(plot);
 }
 
 QwtPlot* MainWindow::newPlot()
@@ -197,34 +201,26 @@ void MainWindow::on_action1_Dichte_triggered()
     plotDensity(caData->getDensity(key));
 }
 
-void MainWindow::on_actionECA1000_triggered()
-{
-    int ecaNumber = QInputDialog::getInt(this, "ECA Nummer", "Bitte Nummer des ECA eingeben", 0, 0, 255);
-    int size = m_xLength;
-    int steps = m_steps;
-    int samples = 100;
-
-    ECA eca = ECA(m_alpha, m_beta, size, ecaNumber);
-    testAutomata(eca, steps, samples);
-}
-
 void MainWindow::testAutomata(AbstractCA &ca, int steps, int samples)
 {
     CAHistory alphaHistory;
     CAHistory betaHistory;
 
-    float alpha = 0.0;
-    while(alpha < 1.1)
+    float alpha = 0.9;
+    while(alpha < 1.01)
     {
         qDebug() << "alpha: " << alpha;
         ca.initAlpha(alpha);
 
         QMap<QString, float> sampleSum;
+        float activitySum = 0.0;
 
         for(int i = 0; i < samples; ++i)
         {
             qDebug() << "sample: " << i;
             CAHistory* lastRun = runCA(ca, steps);
+
+            activitySum += lastRun->getActivity().last().y();
 
             QStringList keys = lastRun->getDensities();
             for(int j = 0; j < keys.size(); ++j)
@@ -242,6 +238,9 @@ void MainWindow::testAutomata(AbstractCA &ca, int steps, int samples)
 
             delete lastRun;
         }
+
+        float averageActivity = activitySum / samples;
+        alphaHistory.appendActivity(averageActivity, alpha);
 
         QStringList keys = sampleSum.keys();
         for(int i = 0; i < keys.size(); ++i)
@@ -252,21 +251,24 @@ void MainWindow::testAutomata(AbstractCA &ca, int steps, int samples)
             alphaHistory.appendDensity(key, average, alpha);
         }
 
-        alpha += 0.1;
+        alpha += 0.01;
     }
 
-    float beta = 0.0;
-    while(beta < 1.1)
+    float beta = 0.9;
+    while(beta < 1.01)
     {
         qDebug() << "beta: " << beta;
         ca.initBeta(beta);
 
         QMap<QString, float> sampleSum;
+        float activitySum = 0.0;
 
         for(int i = 0; i < samples; ++i)
         {
             qDebug() << "sample: " << i;
             CAHistory* lastRun = runCA(ca, steps);
+
+            activitySum += lastRun->getActivity().last().y();
 
             QStringList keys = lastRun->getDensities();
             for(int j = 0; j < keys.size(); ++j)
@@ -285,6 +287,8 @@ void MainWindow::testAutomata(AbstractCA &ca, int steps, int samples)
             delete lastRun;
         }
 
+        float averageActivity = activitySum / samples;
+        betaHistory.appendActivity(averageActivity, beta);
 
         QStringList keys = sampleSum.keys();
         for(int i = 0; i < keys.size(); ++i)
@@ -295,18 +299,25 @@ void MainWindow::testAutomata(AbstractCA &ca, int steps, int samples)
             betaHistory.appendDensity(key, average, beta);
         }
 
-        beta += 0.1;
+        beta += 0.01;
     }
 
+    plotAlphaBeta(alphaHistory.getDensity("1"), betaHistory.getDensity("1"), "1-Dichte");
+    plotAlphaBeta(alphaHistory.getActivity(), betaHistory.getActivity(), "Aktivitaet");
+}
+
+void MainWindow::plotAlphaBeta(QVector<QPointF> alpha, QVector<QPointF> beta, QString title)
+{
     QwtPlotCurve *curveAlpha = new QwtPlotCurve();
-    curveAlpha->setSamples(alphaHistory.getDensity("1"));
+    curveAlpha->setSamples(alpha);
     curveAlpha->setPen(QPen(Qt::blue));
 
     QwtPlotCurve *curveBeta = new QwtPlotCurve();
-    curveBeta->setSamples(betaHistory.getDensity("1"));
+    curveBeta->setSamples(beta);
     curveBeta->setPen(QPen(Qt::red));
 
     QwtPlot *plot = newPlot();
+    plot->setTitle(title);
     curveAlpha->attach(plot);
     curveBeta->attach(plot);
 }
@@ -321,8 +332,33 @@ void MainWindow::on_actionECA_triggered()
     runCA(eca, steps, true);
 }
 
+void MainWindow::on_actionECA1000_triggered()
+{
+    int ecaNumber = QInputDialog::getInt(this, "ECA Nummer", "Bitte Nummer des ECA eingeben", 0, 0, 255);
+    int size = m_xLength;
+    int steps = m_steps;
+    int samples = 100;
+
+    ECA eca = ECA(m_alpha, m_beta, size, ecaNumber);
+    testAutomata(eca, steps, samples);
+}
+
 void MainWindow::on_actionSpiel_des_Lebens_triggered()
 {
     GameOfLife gol = GameOfLife(m_alpha, m_beta, m_xLength, m_yLength);
     runCA(gol, m_steps, true);
+}
+
+void MainWindow::on_actionAktivit_t_triggered()
+{
+    QVector<QPointF> activity = caData->getActivity();
+    plotActivity(activity);
+}
+
+void MainWindow::on_actionSpiel_des_Lebens_2_triggered()
+{
+    int samples = 50;
+
+    GameOfLife gol = GameOfLife(m_alpha, m_beta, m_xLength, m_yLength);
+    testAutomata(gol, m_steps, samples);
 }

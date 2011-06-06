@@ -26,6 +26,12 @@ void Abstract2DCA::initCA()
 
 void Abstract2DCA::run(int steps)
 {
+    if(m_history->getActivity().empty())
+    {
+        m_history->appendDensity("1", density(1));
+        m_history->appendActivity(activity());
+    }
+
     for(int i = 0; i < steps; ++i)
     {
         m_workState = new TwoDimensionState(m_state->xSize(), m_state->ySize());
@@ -46,6 +52,7 @@ void Abstract2DCA::run(int steps)
         delete m_state;
         m_state = m_workState;
 
+//        qDebug() << density(1);
         m_history->appendDensity("1", density(1));
         m_history->appendActivity(activity());
     }
@@ -66,6 +73,8 @@ float Abstract2DCA::activity()
                 instable++;
         }
     }
+
+    instable /= m_state->size();
 
     return instable;
 }

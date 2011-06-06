@@ -55,7 +55,7 @@ private:
     CAHistory *caData;
 
     void plotDensity(QVector<QPointF> density);
-    void plotActivity();
+    void plotActivity(QVector<QPointF> activity);
 
     QwtPlot* newPlot();
 
@@ -69,9 +69,13 @@ private:
     CAHistory* averageHistory(QVector<CAHistory*> historyVector);
     QVector<QPointF> averageAverageHistory(QVector<CAHistory*> historyVector, QString key);
 
+    void plotAlphaBeta(QVector<QPointF> alpha, QVector<QPointF> beta, QString title);
+
     void testAutomata(AbstractCA &ca, int steps, int samples);
 
 private slots:
+    void on_actionSpiel_des_Lebens_2_triggered();
+    void on_actionAktivit_t_triggered();
     void on_actionSpiel_des_Lebens_triggered();
     void on_actionECA1000_triggered();
     void on_actionECA_triggered();

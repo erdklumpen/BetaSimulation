@@ -18,7 +18,7 @@ public:
     ~CAHistory() {}
 
     void appendDensity(QString key, float value, float x = -1.0);
-    void appendActivity(float value);
+    void appendActivity(float value, float x = -1.0);
 
     QVector<QPointF> getDensity(QString key) const;
     QVector<QPointF> getActivity() const;

@@ -76,6 +76,7 @@
      <string>Test</string>
     </property>
     <addaction name="actionECA1000"/>
+    <addaction name="actionSpiel_des_Lebens_2"/>
    </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuAutomaten"/>
@@ -108,6 +109,11 @@
    </property>
   </action>
   <action name="actionSpiel_des_Lebens">
+   <property name="text">
+    <string>Spiel des Lebens</string>
+   </property>
+  </action>
+  <action name="actionSpiel_des_Lebens_2">
    <property name="text">
     <string>Spiel des Lebens</string>
    </property>

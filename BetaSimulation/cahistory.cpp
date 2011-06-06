@@ -29,9 +29,12 @@ void CAHistory::appendDensity(QString key, float value, float x)
     }
 }
 
-void CAHistory::appendActivity(float value)
+void CAHistory::appendActivity(float value, float x)
 {
-    m_activity.append( QPointF(m_activity.size(), value) );
+    if(x == -1.0)
+        x = m_activity.size();
+
+    m_activity.append( QPointF(x, value) );
 }
 
 QVector<QPointF> CAHistory::getDensity(QString key) const

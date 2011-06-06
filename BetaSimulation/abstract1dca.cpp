@@ -33,6 +33,12 @@ void Abstract1DCA::run(int steps)
 
 void Abstract1DCA::initCA()
 {
+    if(m_history->getActivity().empty())
+    {
+        m_history->appendDensity("1", density(1));
+        m_history->appendActivity(activity());
+    }
+
     for(int i = 0; i < m_state->size(); ++i)
     {
         double number = randomNumber();
@@ -56,6 +62,8 @@ float Abstract1DCA::activity()
         if(newState != m_state->atEigen(i))
             instable++;
     }
+
+    instable /= m_state->size();
 
     return instable;
 }
